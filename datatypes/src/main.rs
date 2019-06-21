@@ -1,6 +1,8 @@
 #![allow(dead_code)]
 #![allow(unused_variables)]
 
+use std::collections::HashMap;
+
 //Constants
 const MAXIMUM_NUMBER: u8 = 9; //variables declared in the global scope that do not change 
 
@@ -9,7 +11,9 @@ fn main() {
     //tuples();
     //structs();
     //tuple_structs();
-    arrays();
+    //arrays();
+    //vectors();
+    hashmaps();
 
 }
 
@@ -107,5 +111,58 @@ fn arrays() {
     for i in 0..numbers.len() {
         println!("{}", numbers[i]);
     }
+}
+
+//Vectors
+fn vectors() {
+    //let my_vector: Vec<i32> = Vec::new();
+    let mut my_vector = vec![1, 2, 3, 4];
+
+    //Accessing vector elements using index notation
+    println!("{}", my_vector[2]);
+
+    //Pushing items to a vector
+    my_vector.push(69);
+    println!("{:?}", my_vector);
+
+    //Removing an element
+    my_vector.remove(1);
+    println!("{:?}", my_vector);
+
+    for number in my_vector.iter() {
+        println!("{}", number);
+    }
+}
+
+//Hash map
+fn hashmaps() {
+    let mut marks = HashMap::new();
+
+    //Add values 
+    marks.insert("Rust Programming", 99);
+    marks.insert("Machine Learning", 91);
+    marks.insert("Distributed Systems", 93);
+    marks.insert("Automata Theory", 39);
+
+    //Find length of HashMap
+    println!("How many units have you studied? {}", marks.len());
+
+    //Getting a single value for a certain provided key
+    match marks.get("Automata Theory") {
+        Some(mark) => println!("You got: {} for Automata Theory", mark),
+        None => println!("No marks for Automata Theory found")
+    }
+
+    //Removing a value
+    marks.remove("Distributed Systems");
+    println!("How many units have you studied? {}", marks.len());
+
+    //Loop through HashMap
+    for (unit, mark) in &marks {
+        println!("For {} you got {}%", unit, mark);
+    }
+
+    //Check for value
+    println!("Did you study OOP?: {}", marks.contains_key("OOP"));
 }
 
